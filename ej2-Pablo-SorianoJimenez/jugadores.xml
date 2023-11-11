@@ -1,3 +1,62 @@
-jugadores.Jugador@27973e9b
-jugadores.Jugador@312b1dae
-jugadores.Jugador@7530d0a
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.4.1" class="java.beans.XMLDecoder">
+ <object class="jugadores.ListaJugadores">
+  <void method="add">
+   <object class="jugadores.Jugador">
+    <void property="apodo">
+     <string> Apodo: Alfa</string>
+    </void>
+    <void property="descripcion">
+     <string> Descripcion: gdfdgsarfgrds</string>
+    </void>
+    <void property="dorsal">
+     <string> Dorsal: 17</string>
+    </void>
+    <void property="nombre">
+     <string>Nombre: Pablo</string>
+    </void>
+    <void property="puesto">
+     <string> Puesto: DC</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="jugadores.Jugador">
+    <void property="apodo">
+     <string> Apodo: Zardem</string>
+    </void>
+    <void property="descripcion">
+     <string> Descripcion: dhfsgdf</string>
+    </void>
+    <void property="dorsal">
+     <string> Dorsal: 7</string>
+    </void>
+    <void property="nombre">
+     <string>Nombre: Javier</string>
+    </void>
+    <void property="puesto">
+     <string> Puesto: EI</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="jugadores.Jugador">
+    <void property="apodo">
+     <string> Apodo: Dom</string>
+    </void>
+    <void property="descripcion">
+     <string> Descripcion: hrgfjgfg</string>
+    </void>
+    <void property="dorsal">
+     <string> Dorsal: 8</string>
+    </void>
+    <void property="nombre">
+     <string>Nombre: Daniel</string>
+    </void>
+    <void property="puesto">
+     <string> Puesto: DC</string>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

@@ -1,15 +1,2 @@
-Nombre: Dani
-Apodo: Dom
-Puesto: DC
-Dorsal: 8
-Descripcion: Es el puto messo
-Nombre: Javi
-Apodo: Zardem
-Puesto: EI
-Dorsal: 7
-Descripcion: El bicho siuuuu
-Nombre: Manu
-Apodo: Nunu
-Puesto: MC
-Dorsal: 6
-Descripcion: Inista
+Nombre: Pablo; Apodo: Alfa; Puesto: DC; Dorsal: 17; Descripcion: dgfsfgad
+Nombre: Dani; Apodo: Dom; Puesto: DC; Dorsal: 8; Descripcion: jtyrerwerf

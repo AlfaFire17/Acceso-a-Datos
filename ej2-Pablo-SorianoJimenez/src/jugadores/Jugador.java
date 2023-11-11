@@ -2,7 +2,7 @@ package jugadores;
 
 import java.io.Serializable;
 
-public class Jugador implements Serializable{
+public class Jugador implements Serializable {
     private String nombre;
     private String apodo;
     private String puesto;
@@ -58,5 +58,14 @@ public class Jugador implements Serializable{
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    @Override
+    public String toString() {
+        return "Nombre: " + nombre + "\n" +
+                "Apodo: " + apodo + "\n" +
+                "Puesto: " + puesto + "\n" +
+                "Dorsal: " + dorsal + "\n" +
+                "Descripcion: " + descripcion;
     }
 }

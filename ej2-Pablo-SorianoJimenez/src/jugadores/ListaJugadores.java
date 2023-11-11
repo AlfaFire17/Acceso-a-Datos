@@ -1,62 +1,51 @@
 package jugadores;
 
+
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
 import java.io.*;
 import java.util.ArrayList;
 
 public class ListaJugadores extends ArrayList<Jugador> {
-    private static final String FORMATO_XML = "xml";
-    private static final String FORMATO_OBJ = "obj";
 
-    private String formatoActual = FORMATO_XML;
+    public void leerListaJugadores(String fileName) throws IOException {
+        File archivo = new File(fileName);
 
-    public void leerListaJugadores(String fileName) throws IOException, ClassNotFoundException {
-        File miFichero = new File(fileName);
-        if (miFichero.exists()) {
-            if (FORMATO_XML.equals(formatoActual)) {
-                // Leer en formato XML
-                ObjectInputStream objectFichero = new ObjectInputStream(new FileInputStream(miFichero));
-                int numJugadores = objectFichero.readInt();
-                for (; numJugadores > 0; numJugadores--) {
-                    add((Jugador) objectFichero.readObject());
+        if (archivo.exists()) {
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(";"); // Utiliza un separador (por ejemplo, ";")
+                if (parts.length == 5) {
+                    Jugador jugador = new Jugador(parts[0], parts[1], parts[2], parts[3], parts[4]);
+                    add(jugador);
                 }
-                objectFichero.close();
-            } else if (FORMATO_OBJ.equals(formatoActual)) {
-                // Leer en formato de objeto
-                ObjectInputStream objectFichero = new ObjectInputStream(new FileInputStream(miFichero));
-                ListaJugadores listaJugadores = (ListaJugadores) objectFichero.readObject();
-                addAll(listaJugadores);
-                objectFichero.close();
+            }
+        }
+        if (fileName.toLowerCase().endsWith(".xml")) {
+            try (XMLDecoder xmlDecoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(fileName)))) {
+                ArrayList<Jugador> jugadores = (ArrayList<Jugador>) xmlDecoder.readObject();
+                addAll(jugadores);
             }
         }
     }
 
     public void escribirListaJugadores(String fileName) throws IOException {
-        if (FORMATO_XML.equals(formatoActual)) {
-            // Escribir en formato XML
-            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-            for (Jugador jugador : this) {
-                writer.write(jugador.toString());
-                writer.newLine();
+        // Añade el código para escribir en formato XML si el archivo tiene extensión ".xml"
+        if (fileName.toLowerCase().endsWith(".xml")) {
+            try (XMLEncoder xmlEncoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(fileName)))) {
+                xmlEncoder.writeObject(this);
             }
-            writer.close();
-        } else if (FORMATO_OBJ.equals(formatoActual)) {
-            // Escribir en formato de objeto
-            ObjectOutputStream objectFichero = new ObjectOutputStream(new FileOutputStream(fileName));
-            objectFichero.writeInt(size());
-            for (Jugador jugador : this) {
-                objectFichero.writeObject(jugador);
+        } else {
+            // El código existente para escribir en formato TXT
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+                for (Jugador jugador : this) {
+                    String line = "Nombre: " + jugador.getNombre() + "; " + "Apodo: " + jugador.getApodo() + "; " +
+                            "Puesto: " + jugador.getPuesto() + "; " + "Dorsal: " + jugador.getDorsal() + "; " + "Descripcion: " + jugador.getDescripcion();
+                    writer.write(line);
+                    writer.newLine();
+                }
             }
-            objectFichero.close();
-        }
-    }
-
-    public void cambiarFormatoArchivo() {
-        if (FORMATO_XML.equals(formatoActual)) {
-            formatoActual = FORMATO_OBJ;
-            System.out.println("Formato cambiado a OBJ");
-        } else if (FORMATO_OBJ.equals(formatoActual)) {
-            formatoActual = FORMATO_XML;
-            System.out.println("Formato cambiado a XML");
         }
     }
 }

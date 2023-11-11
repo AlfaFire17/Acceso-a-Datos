@@ -45,11 +45,11 @@ public class Main {
     }
 
     public static void verJugadores (Jugador jugador) {
-        System.out.println("Nombre: " + jugador.getNombre());
-        System.out.println("Apodo: " + jugador.getApodo());
-        System.out.println("Puesto: " + jugador.getPuesto());
-        System.out.println("Dorsal: " + jugador.getDorsal());
-        System.out.println("Descripcion: " + jugador.getDescripcion());
+        System.out.println(jugador.getNombre());
+        System.out.println(jugador.getApodo());
+        System.out.println(jugador.getPuesto());
+        System.out.println(jugador.getDorsal());
+        System.out.println(jugador.getDescripcion());
     }
 
     public static Jugador buscarJugador() {
@@ -62,7 +62,7 @@ public class Main {
         System.out.println();
 
         for (Jugador j : listaJugadores) {
-            if (nombre.equals(j.getNombre()) && apodo.equals(j.getApodo()) && dorsal.equals(j.getDorsal())) {
+            if (j.getNombre().contains(nombre) && j.getApodo().contains(apodo) && j.getDorsal().contains(dorsal)) {
                 return j;
             }
         }
@@ -74,35 +74,31 @@ public class Main {
         scanner = new Scanner(System.in);
         int opcion = 0;
 
-        try {
-            listaJugadores.leerListaJugadores("jugadores.txt");
+        listaJugadores.leerListaJugadores("jugadores.txt");
 
-            opcion = menu();
-            while (opcion != 0) {
-                switch (opcion) {
-                    case 1:
-                        listaJugadores.add(aniadirJugador());
-                        break;
-                    case 2:
-                        for (Jugador jugador : listaJugadores) {
-                            verJugadores(jugador);
-                        }
-                        break;
-                    case 3:
-                        Jugador j = buscarJugador();
-                        if (j != null) {
-                            verJugadores(j);
-                        } else {
-                            System.out.println("Este jugador no existe");
-                        }
-                }
-                opcion = menu();
+        opcion = menu();
+        while (opcion != 0) {
+            switch (opcion) {
+                case 1:
+                    listaJugadores.add(aniadirJugador());
+                    break;
+                case 2:
+                    for (Jugador jugador : listaJugadores) {
+                        verJugadores(jugador);
+                    }
+                    break;
+                case 3:
+                    Jugador j = buscarJugador();
+                    if (j != null) {
+                        verJugadores(j);
+                    } else {
+                        System.out.println("Este jugador no existe");
+                    }
             }
-
-            listaJugadores.escribirListaJugadores("jugadores.txt");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            opcion = menu();
         }
+
+        listaJugadores.escribirListaJugadores("jugadores.txt");
+
     }
 }
